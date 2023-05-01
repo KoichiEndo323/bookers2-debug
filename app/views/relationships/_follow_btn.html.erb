@@ -1,0 +1,11 @@
+<% unless user == current_user %>
+<% link_to user_relationships_path(user),method: :post, class: "btn btn-success" do %>
+ <p>フォローする</p>
+<% end %>
+<% end %>
+
+<% unless user == current_user %>
+<% link_to user_relationships_path(user),method: :delete, class: "btn btn-info" do %>
+ <p>フォロー解除</p>
+<% end %>
+<% end %>

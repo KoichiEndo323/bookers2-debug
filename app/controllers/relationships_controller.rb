@@ -1,4 +1,4 @@
-class ReletionshipsController < ApplicationController
+class RelationshipsController < ApplicationController
   before_action :authenticate_user!
 
   def create
@@ -11,6 +11,6 @@ class ReletionshipsController < ApplicationController
     following = current_user.relationships.find_by(follower_id: params[:user_id])
     following.destroy
     redirect_to request.referer || root_path
-
   end
+
 end
