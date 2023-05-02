@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class='mx-auto col-12'>
+      <h1>Follower Users</h1>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th colspan="5"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.empty? %>
+          <tr>
+           <td colspan="3">現在フォローしているユーザーはいません</td>
+          </tr>
+          <% else %>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+              <td><%= user.name %></td>
+              <td>フォロー数:<%= user.followings.count %></td>
+              <td>フォロワー数:<%= user.followers.count %></td>
+              <td><%= link_to 'Show', user %></td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

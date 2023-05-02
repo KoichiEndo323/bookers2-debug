@@ -1,0 +1,13 @@
+ <div class='row'>
+  <% unless user == current_user %>
+   <% if user.is_followed_by?(current_user) %>
+   <%= link_to user_relationships_path(user), method: :delete do%>
+    <button class="btn btn-primary">フォロー解除</button>
+    <% end %>
+   <% else %>
+    <%= link_to user_relationships_path(user), method: :post do%>
+     <button class="btn btn-success">フォロー</button>
+     <% end %>
+   <% end %>
+  <% end %>
+ </div>
