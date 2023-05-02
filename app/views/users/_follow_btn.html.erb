@@ -1,13 +1,9 @@
  <div class='row'>
   <% unless user == current_user %>
    <% if user.is_followed_by?(current_user) %>
-   <%= link_to user_relationships_path(user), method: :delete do%>
-    <button class="btn btn-primary">フォロー解除</button>
-    <% end %>
+    <%= link_to "フォロー解除" ,user_relationships_path(user), method: :delete, class: "btn btn-primary" %>
    <% else %>
-    <%= link_to user_relationships_path(user), method: :post do%>
-     <button class="btn btn-success">フォロー</button>
-     <% end %>
+    <%= link_to "フォローする", user_relationships_path(user), method: :post, class: "btn btn-success" %>
    <% end %>
   <% end %>
  </div>
