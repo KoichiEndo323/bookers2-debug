@@ -11,5 +11,4 @@ class SearchesController < ApplicationController
       render "/searches/result"
     end
   end
-
 end
