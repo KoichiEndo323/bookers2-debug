@@ -3,6 +3,7 @@
       <% book.book_comments.each do |book_comment| %>
       <tr>
 
+
         <td>
           <%= link_to user_path(book_comment.user), local: false do %>
             <%= image_tag book_comment.user.get_profile_image, size: "100x100" %><br>
