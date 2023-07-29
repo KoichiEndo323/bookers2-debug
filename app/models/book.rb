@@ -10,6 +10,12 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+#一週間の間でいいねの多い順にソート
+  def favorites_within_past_week
+    favorites.where(created_at: 1.week.ago..Time.zone.now).count
+  end
+
+
 #検索方法の分岐
     def self.looks(search, word)
       if search == "perfect"
