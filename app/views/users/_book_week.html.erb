@@ -1,0 +1,17 @@
+<h4>7日間分の投稿数</h4>
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <% (0..6).reverse_each do |days| %>
+        <th><%= days.days.ago.strftime("%Y/%m/%d") %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% (0..6).reverse_each do |days| %>
+        <td><%= @books.send("created_#{days}day_ago").count %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

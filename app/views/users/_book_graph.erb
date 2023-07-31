@@ -1,0 +1,39 @@
+<canvas id="myChart"></canvas>
+  <!-- chart.jsのライブラリを読み込む -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- グラフの描画用のスクリプト -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const labels = [
+      <% (0..6).reverse_each do |days| %>
+        "<%= days.days.ago.strftime("%Y/%m/%d") %>",
+      <% end %>
+    ];
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "投稿数",
+          borderColor: "rgb(75, 192, 192)",
+          data: [
+            <% (0..6).reverse_each do |days| %>
+              <%= @books.send("created_#{days}day_ago").count %>,
+            <% end %>
+          ],
+          fill: false,
+        },
+      ],
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+      options: {},
+    };
+
+    var myChart = new Chart(document.getElementById("myChart"), config);
+  });
+</script>
