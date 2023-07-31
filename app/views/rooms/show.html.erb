@@ -1,20 +1,37 @@
-<% @entries.each do |e| %>
-  <% if @myUserId != e.user.id %>
-    <h2><%= e.user.name %>さんとのトークルーム</h2>
+<div class="container">
+  <% @entries.each do |e| %>
+    <% if @myUserId != e.user.id %>
+      <div class="user-name">
+        <h2><%= e.user.name %>さんとのトークルーム</h2>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-<% link_to "ユーザー一覧に戻る", users_path %>
+  <%= link_to "ユーザー一覧に戻る", users_path %>
 
-<% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <% @myUserId == m.user.id %>
-    <p><%= m.user.name %></p>
-      <p><%= m.message %></p>
-  <% end %>
-<% end %>
-
-<%= form_with @message do |f| %>
-  <%= f.text_field :message, placeholder: "メッセージを入力してください", size: 50, class:"form-text-field" %>
-    <%= f.hidden_field :room_id, value: @room.id %>
-      <%= f.submit "投稿", class: "form-submit" %>
-<% end %>
+  <div class="row d-block pt-1" style="height:800px;overflow: scroll;">
+    <div>
+        <% @messages.each do |m| %>
+          <% if m.user.id==current_user.id %>
+            <div class="mb-1 d-flex">
+              <%= image_tag m.user.get_profile_image, size:'50x50', class:"rounded ml-1 mr-2" %>
+              <div class="rounded bg-success text-black px-2" style="max-width:50%"><%= m.message %></div>
+            </div>
+          <% else %>
+            <div class="d-flex flex-row-reverse mb-1">
+              <%= image_tag m.user.get_profile_image, size:'50x50', class:"rounded ml-1 mr-2" %>
+              <div class="rounded bg-secondary text-white text-break mw-100 px-2" style="max-width:50%"><%= m.message %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+  <div class="mt-4">
+    <%= form_for @message do |f| %>
+      <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 50, class:"form-text-field" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.submit "投稿",class: 'form-submit'%>
+    <% end %>
+  </div>
+</div>
+</div>
+</div>
